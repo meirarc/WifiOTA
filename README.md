@@ -16,10 +16,6 @@ Public functions:
 
     Contructor, inform the `ssid` and wifi `password`to initiate the connection 
 
-- `void begin()`
-
-    Initiate the connection and OTA setup
-
 - `void handle()`
 
     lookup for OTA updates

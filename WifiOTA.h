@@ -10,6 +10,7 @@ class WifiOTA
 {
   public:
     WifiOTA(char* ssid, char* password);
+    void begin();
     void handle();
     
   private:

@@ -3,7 +3,9 @@
 WifiOTA::WifiOTA(char* ssid, char* password) {
   _ssid = ssid;
   _password = password;
+}
 
+void WifiOTA::begin() {
   Serial.println("Connection statring...");
   
   WiFi.disconnect();
