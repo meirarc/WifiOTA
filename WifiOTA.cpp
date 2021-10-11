@@ -1,8 +1,5 @@
 #include "WifiOTA.h"
 
-WifiOTA::WifiOTA() {
-}
-
 void WifiOTA::configModeCallback (WiFiManager *myWiFiManager) {  
   Serial.println("Entered config mode");
   Serial.println(WiFi.softAPIP());
