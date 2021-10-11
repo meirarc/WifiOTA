@@ -6,7 +6,13 @@ Wifi connection integrated with Over The Air (OTA) updates for ESP32
 
 1. Download the code
 2. Add the folder under `Arduino/libraries`
-3. Restart Arduino IDE
+3. Add the additional libraries below under `Arduino/libraries`
+
+    * https://github.com/zhouhan0126/WIFIMANAGER-ESP32.git
+    * https://github.com/zhouhan0126/DNSServer---esp32.git
+    * https://github.com/zhouhan0126/WebServer-esp32.git
+
+4. Restart Arduino IDE
 
 ## Library details
 
@@ -39,7 +45,6 @@ void setup() {
 
   wifi.begin();
 }
-
 
 void loop() {
   wifi.handle();

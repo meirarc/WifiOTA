@@ -1,5 +1,19 @@
+/**
+ * @file WifiOTA.cpp
+ * @author meirarc
+ * @brief Wifi Manager and OTA update library
+ * @version 0.1
+ * @date 2021-10-11
+ * 
+ * @copyright Copyright (c) 2021
+ * 
+ */
 #include <WifiOTA.h>
 
+/**
+ * @brief begin(). to initiate the Wifi and OTA setup
+ * 
+ */
 void WifiOTA::begin(){
     WiFiManager wifiManager;
     if(!wifiManager.autoConnect(_APName)) {
@@ -39,6 +53,10 @@ void WifiOTA::begin(){
     Serial.println("connected...yeey :)");
 }
 
+/**
+ * @brief reset(). to reset the wifi network.
+ * 
+ */
 void WifiOTA::reset(){
     WiFiManager wifiManager;
     if (!wifiManager.startConfigPortal(_APName)) {
@@ -50,6 +68,10 @@ void WifiOTA::reset(){
     Serial.println("connected...yeey :)");
 }
 
+/**
+ * @brief handle(). to be added on the loop() to trigger OTA updates.
+ * 
+ */
 void WifiOTA::handle(){
     ArduinoOTA.handle();
 }
