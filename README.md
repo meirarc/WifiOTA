@@ -12,10 +12,6 @@ Wifi connection integrated with Over The Air (OTA) updates for ESP32
 
 Public functions:
 
-- `WifiOTA(char* ssid, char* password)`
-
-    Contructor, inform the `ssid` and wifi `password`to initiate the connection 
-
 - `void begin()`
 
     Initiate the connection and OTA setup
@@ -24,22 +20,31 @@ Public functions:
 
     lookup for OTA updates
 
+- `void reset()`
+
+    Reset the wifi saved and enter on the configuration AP module
+
 ## Example
 
 ```c++
 #include <WifiOTA.h>
 
-char* ssid = "ssid";
-char* password = "password";
+#define TRIGGER_PIN 0
 
-WifiOTA wifi(ssid, password);
+WifiOTA wifi;
 
 void setup() {
-  Serial.begin(9600);
+  Serial.begin(9200);
+  pinMode(TRIGGER_PIN, INPUT);
+
   wifi.begin();
 }
 
+
 void loop() {
   wifi.handle();
+  if ( digitalRead(TRIGGER_PIN) == LOW ) {
+    wifi.reset();
+  }
 }
 ```
