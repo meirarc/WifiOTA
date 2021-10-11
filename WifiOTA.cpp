@@ -14,8 +14,8 @@ void WifiOTA::saveConfigCallback () {
 void WifiOTA::begin() {
   Serial.println("Connection statring...");
   
-  _wifiManager.setAPCallback(configModeCallback); 
-  _wifiManager.setSaveConfigCallback(saveConfigCallback); 
+  _wifiManager.setAPCallback(configModeCallback(_wifiManager)); 
+  _wifiManager.setSaveConfigCallback(saveConfigCallback()); 
   _wifiManager.autoConnect("ESP_AP", "12345678"); 
 
   ArduinoOTA
