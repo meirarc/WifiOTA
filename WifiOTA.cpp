@@ -1,24 +1,25 @@
 #include "WifiOTA.h"
 
-WifiOTA::WifiOTA(char* ssid, char* password) {
-  _ssid = ssid;
-  _password = password;
+WifiOTA::WifiOTA() {
+}
+
+void WifiOTA::configModeCallback (WiFiManager *myWiFiManager) {  
+  Serial.println("Entered config mode");
+  Serial.println(WiFi.softAPIP());
+  Serial.println(myWiFiManager->getConfigPortalSSID());
+}
+
+void WifiOTA::saveConfigCallback () {
+  Serial.println("Configuração salva");
+  Serial.println(WiFi.localIP());
 }
 
 void WifiOTA::begin() {
   Serial.println("Connection statring...");
-  WiFi.mode(WIFI_STA);
-  WiFi.begin(_ssid, _password);
   
-  while (WiFi.waitForConnectResult() != WL_CONNECTED) {
-    Serial.println("Connection Failed! Rebooting...");
-    delay(5000);
-    ESP.restart();
-  }
-
-  Serial.println("Connection Ready");
-  Serial.print("IP address: ");
-  Serial.println(WiFi.localIP());
+  _wifiManager.setAPCallback(configModeCallback); 
+  _wifiManager.setSaveConfigCallback(saveConfigCallback); 
+  _wifiManager.autoConnect("ESP_AP", "12345678"); 
 
   ArduinoOTA
     .onStart([]() {
@@ -49,6 +50,16 @@ void WifiOTA::begin() {
   ArduinoOTA.begin();
 }
 
-void WifiOTA::handle() {
+void WifiOTA::handle(Button button) {
   ArduinoOTA.handle();
+
+  if(button.isPressed()) {
+    WiFiManager wifiManager;
+      if(!wifiManager.startConfigPortal("ESP_AP", "12345678") )
+      {
+        Serial.println("Falha ao conectar");
+        delay(2000);
+        ESP.restart();
+      }
+  }
 }
