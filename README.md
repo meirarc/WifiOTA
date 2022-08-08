@@ -1,6 +1,12 @@
 # ⚙ WifiOTA
 
-Wifi connection integrated with Over The Air (OTA) updates for ESP32
+Library to Arduino IDE and Platform IO to do a Wifi connection integrated with Over The Air (OTA) updates for ESP32.
+
+How does OTA Web Updater Work?
+- The first sketch should be uploaded via serial port. This sketch should contain the code to create the OTA Web Updater, so that you are able to upload code later using your browser.
+- The OTA Web Updater sketch creates a web server you can access to upload a new sketch via web browser.
+- Then, you need to implement OTA routines in every sketch you upload, so that you’re able to do the next updates/uploads over-the-air.
+- If you upload a code without a OTA routine you’ll no longer be able to access the web server and upload a new sketch over-the-air.
 
 ## ⚡ Install
 
